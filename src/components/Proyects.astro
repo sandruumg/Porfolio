@@ -1,46 +1,64 @@
 ---
 import AstroIcon from './icons/AstroIcon.astro';
 import TypeScriptIcon from './icons/TypeScripIcon.astro';
+import TailWindIcon from './icons/TailWindIcon.astro';
+import htmlIcon from './icons/htmlIcon.astro';
+import GitHub from './icons/GitHub.astro';
+
 const TAGS = {
     ASTRO:{
         name:'Astro',
-        class:'bg-white text-black',
+        class:'bg-[#ee46e05e] text-[#ee46e0]',
         icon: AstroIcon
     },
     TYPESCRIPT:{
         name:'TypeScript',
-        class:'bg-white text-black',
+        class:'text-[#367cbe] bg-[#2c77bc6e]',
         icon: TypeScriptIcon
+    },
+    TAILWINDCSS:{
+        name:'TailWind CSS',
+        class:'bg-[#00aab759] text-[#00aab7]',
+        icon: TailWindIcon
+    },
+    HTML:{
+        name:'HTML',
+        class:'bg-[#e44d275e] text-[#e44d27]',
+        icon: htmlIcon
     }
 }
 const PROYECTS = [
     {
         title:'Bookify - Proyecto TFG',
-        description:'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+        description:'En este proyecto de fin de grado, utilicé Astro, Tailwind y TypeScript para desarrollar una web moderna y optimizada, con el objetivo de demostrar mis habilidades en el desarrollo front-end. Decidí alejarme de las tecnologías tradicionales que nos habían enseñado, para aprender y aplicar nuevas herramientas de forma eficiente. A través de este trabajo, no solo profundicé en la creación de interfaces, sino que también reforcé mi capacidad para adaptarme rápidamente a nuevas tecnologías y construir aplicaciones web escalables.',
         link:'https://bookifytfg.vercel.app/',
         github:'https://github.com/sandruumg/TFG',
         image:'proyects/bookify.webp',
-        tags: [TAGS.ASTRO, TAGS.TYPESCRIPT]
+        tags: [TAGS.ASTRO, TAGS.TYPESCRIPT, TAGS.TAILWINDCSS, TAGS.HTML]
     }
 ]
 ---
 
 {
-    PROYECTS.map(({title, description, tags, image, link}) =>(
+    PROYECTS.map(({title, description, tags, image, link, github}) =>(
         <article>
             <h3 class="text-2xl font-semibold text-yellow-200 mb-2" >{title}</h3>
             <p class="text-lg mb-4 text-pretty">{description}</p>
-            <ul class="flex gap-x-2 flex-row">
+            <ul class="flex gap-x-2 flex-row items-center sm:grid sm:grid-rows-2 sm:grid-cols-4 sm:mt-8">
                 {
                     tags.map(tag=>(
-                        <li>
-                            <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2`}>
+                        <li class="flex sm:col-span-1 justify-center">
+                            <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2 mb-4`}>
                                 <tag.icon class="size-4"></tag.icon>
                                 {tag.name} 
                             </span>
                         </li>
                     ))
                 }
+                <a href={github} class={'sm:col-span-4 sm:row-start-2 sm:mx-auto hover:bg-white/40 transition-colors duration-300 flex mx-10 justify-between items-center rounded-full text-sm py-1 px-2 bg-white/20 border-white/30 border'}>
+                    <GitHub></GitHub>
+                    GitHub - TFG
+                </a>
             </ul>
             <a href={link} target="_blank">
                 <img class="transform transition duration-300 hover:scale-105" src={image} alt={title}>
