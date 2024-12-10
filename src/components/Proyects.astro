@@ -19,14 +19,14 @@ const PROYECTS = [
         description:'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
         link:'https://bookifytfg.vercel.app/',
         github:'https://github.com/sandruumg/TFG',
-        image:'/public/proyects/bookify.webp',
+        image:'../../public/proyects/bookify.webp',
         tags: [TAGS.ASTRO, TAGS.TYPESCRIPT]
     }
 ]
 ---
 
 {
-    PROYECTS.map(({title, description, tags, image}) =>(
+    PROYECTS.map(({title, description, tags, image, link}) =>(
         <article>
             <h3 class="text-2xl font-semibold text-yellow-200 mb-2" >{title}</h3>
             <p class="text-lg mb-4 text-pretty">{description}</p>
@@ -42,7 +42,9 @@ const PROYECTS = [
                     ))
                 }
             </ul>
-            <img src={image} alt={title}>
+            <a href={link} target="_blank">
+                <img class="transform transition duration-300 hover:scale-105" src={image} alt={title}>
+            </a>
         </article>
     ))
 }
