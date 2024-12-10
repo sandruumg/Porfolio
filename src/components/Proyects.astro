@@ -1,0 +1,48 @@
+---
+import AstroIcon from './icons/AstroIcon.astro';
+import TypeScriptIcon from './icons/TypeScripIcon.astro';
+const TAGS = {
+    ASTRO:{
+        name:'Astro',
+        class:'bg-white text-black',
+        icon: AstroIcon
+    },
+    TYPESCRIPT:{
+        name:'TypeScript',
+        class:'bg-white text-black',
+        icon: TypeScriptIcon
+    }
+}
+const PROYECTS = [
+    {
+        title:'Bookify - Proyecto TFG',
+        description:'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+        link:'https://bookifytfg.vercel.app/',
+        github:'https://github.com/sandruumg/TFG',
+        image:'/public/proyects/bookify.webp',
+        tags: [TAGS.ASTRO, TAGS.TYPESCRIPT]
+    }
+]
+---
+
+{
+    PROYECTS.map(({title, description, tags, image}) =>(
+        <article>
+            <h3 class="text-2xl font-semibold text-yellow-200 mb-2" >{title}</h3>
+            <p class="text-lg mb-4 text-pretty">{description}</p>
+            <ul class="flex gap-x-2 flex-row">
+                {
+                    tags.map(tag=>(
+                        <li>
+                            <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2`}>
+                                <tag.icon class="size-4"></tag.icon>
+                                {tag.name} 
+                            </span>
+                        </li>
+                    ))
+                }
+            </ul>
+            <img src={image} alt={title}>
+        </article>
+    ))
+}
