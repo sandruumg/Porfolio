@@ -44,22 +44,23 @@ const PROYECTS = [
         <article>
             <h3 class="text-2xl font-semibold text-yellow-200 mb-2" >{title}</h3>
             <p class="text-lg mb-4 text-pretty">{description}</p>
-            <ul class="flex gap-x-2 flex-row items-center sm:grid sm:grid-rows-2 sm:grid-cols-4 sm:mt-8">
+            <ul class="flex flex-wrap gap-x-2 gap-y-2 items-center">
                 {
-                    tags.map(tag=>(
-                        <li class="flex sm:col-span-1 justify-center">
-                            <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2 mb-4`}>
+                    tags.map(tag => (
+                        <li class="flex justify-center">
+                            <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2`}>
                                 <tag.icon class="size-4"></tag.icon>
-                                {tag.name} 
+                                {tag.name}
                             </span>
                         </li>
                     ))
                 }
-                <a href={github} class={'sm:col-span-4 sm:row-start-2 sm:mx-auto hover:bg-white/40 transition-colors duration-300 flex mx-10 justify-between items-center rounded-full text-sm py-1 px-2 bg-white/20 border-white/30 border'}>
+                <a href={github} class="hover:bg-white/40 transition-colors duration-300 flex justify-between items-center rounded-full text-sm py-1 px-2 bg-white/20 border-white/30 border">
                     <GitHub></GitHub>
                     GitHub - TFG
                 </a>
             </ul>
+
             <a href={link} target="_blank">
                 <img class="transform transition duration-300 hover:scale-105" src={image} alt={title}>
             </a>
