@@ -121,12 +121,12 @@ const PROYECTS = [
   <div class="slider-container" id="sliderContainer">
     <div class="slider-track" id="sliderTrack">
       {PROYECTS.map((project, i) => (
-        <article class="slider-item" key={i}>
+        <article class="slider-item" >
           <h3 class="text-2xl font-semibold text-yellow-200 mb-2">{project.title}</h3>
           <p class="text-lg mb-4 text-pretty">{project.description}</p>
           <ul class="flex flex-wrap gap-x-2 gap-y-2 items-center mb-4">
             {project.tags.map(tag => (
-              <li class="flex justify-center" key={tag.name}>
+              <li class="flex justify-center" >
                 <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2`}>
                   <tag.icon class="size-4" />
                   {tag.name}
@@ -157,30 +157,40 @@ const PROYECTS = [
 </div>
 
 <script>
-  const sliderTrack = document.getElementById('sliderTrack');
-  const sliderContainer = document.getElementById('sliderContainer');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const total = sliderTrack.children.length;
-  let currentIndex = 0;
+ document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('sliderTrack');
+    const container = document.getElementById('sliderContainer');
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
 
-  function updateSlide() {
-    const slideWidth = sliderContainer.clientWidth; // ancho visible real
-    sliderTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-  }
+    // Validación segura
+    if (!track || !container || !prev || !next) return;
 
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + total) % total;
+    // Ahora sí puedes usar aserciones
+    const sliderTrack = track as HTMLElement;
+    const sliderContainer = container as HTMLElement;
+    const prevBtn = prev as HTMLElement;
+    const nextBtn = next as HTMLElement;
+
+    const total = sliderTrack.children.length;
+    let currentIndex = 0;
+
+    function updateSlide() {
+      const slideWidth = sliderContainer.clientWidth;
+      sliderTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + total) % total;
+      updateSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % total;
+      updateSlide();
+    });
+
+    window.addEventListener('resize', updateSlide);
     updateSlide();
   });
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % total;
-    updateSlide();
-  });
-
-  // Actualizar al redimensionar ventana
-  window.addEventListener('resize', updateSlide);
-
-  updateSlide();
 </script>
