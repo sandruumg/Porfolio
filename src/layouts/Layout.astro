@@ -2,6 +2,7 @@
 import "@fontsource-variable/onest";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Favicon from "../../public/favicon.svg";
 interface Props {
 	title: string;
 }
@@ -14,7 +15,8 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8">
     <title>{title}</title>
-  </head>
+    <link rel="icon" type="image/svg+xml" href={Favicon.src} />
+</head>
   <body>
     <div class="fixed inset-0 -z-10 min-h-screen w-full [background:radial-gradient(125%_125%_at_50%_10%,#000_50%,#3498db_100%)]"></div>
     <Header />

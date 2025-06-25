@@ -4,6 +4,10 @@ import TypeScriptIcon from './icons/TypeScripIcon.astro';
 import TailWindIcon from './icons/TailWindIcon.astro';
 import htmlIcon from './icons/htmlIcon.astro';
 import GitHub from './icons/GitHub.astro';
+import WordPress from './icons/WordPressIcon.astro'
+import WordPressIcon from './icons/WordPressIcon.astro';
+import PhpIcon from './icons/PhpIcon.astro';
+import JavaScriptIcon from './icons/JavaScriptIcon.astro';
 
 const TAGS = {
     ASTRO:{
@@ -25,45 +29,158 @@ const TAGS = {
         name:'HTML',
         class:'bg-[#e44d275e] text-[#e44d27]',
         icon: htmlIcon
+    },
+    WORDPRESS:{
+      name: 'WordPress',
+      class: 'bg-[#21749b66] text-[#21749b]',
+      icon: WordPressIcon
+    },
+    PHP:{
+      name:'PHP',
+      class: 'bg-[#777cb366] text-[#777cb3]',
+      icon: PhpIcon
+    },
+    JAVASCRIPT:{
+      name:'JavaScript',
+      class:'bg-[#ffd60266] text-[#000001]',
+      icon: JavaScriptIcon
     }
 }
 const PROYECTS = [
     {
         title:'Bookify - Proyecto TFG',
         description:'En este proyecto de fin de grado, utilicé Astro, Tailwind y TypeScript para desarrollar una web moderna y optimizada, con el objetivo de demostrar mis habilidades en el desarrollo front-end. Decidí alejarme de las tecnologías tradicionales que nos habían enseñado, para aprender y aplicar nuevas herramientas de forma eficiente. A través de este trabajo, no solo profundicé en la creación de interfaces, sino que también reforcé mi capacidad para adaptarme rápidamente a nuevas tecnologías y construir aplicaciones web escalables.',
+        githubLabel: 'GitHub - TFG',
         link:'https://bookifytfg.vercel.app/',
         github:'https://github.com/sandruumg/TFG',
         image:'proyects/bookify.webp',
         tags: [TAGS.ASTRO, TAGS.TYPESCRIPT, TAGS.TAILWINDCSS, TAGS.HTML]
+    },
+    {
+        title:'GymFitness - Proyecto WordPress',
+        description:'En este proyecto de aprendizaje, utilicé WordPress para familiarizarme con la gestión de contenidos y la personalización de temas. Este proyecto me permitió entender la integración entre desarrollo web y sistemas de gestión de contenidos, además de reforzar mi capacidad para trabajar con tecnologías complementarias y mejorar la experiencia del usuario en sitios dinámicos.',
+        githubLabel: 'GitHub - GYMFITNESS',
+        link:'https://dev-gymfitnesssandra.pantheonsite.io/',
+        github:'https://github.com/sandruumg/GymFitness---WordPress',
+        image:'proyects/GymFitness.webp',
+        tags: [TAGS.WORDPRESS, TAGS.PHP, TAGS.JAVASCRIPT, TAGS.HTML, TAGS.TAILWINDCSS]
     }
 ]
 ---
 
-{
-    PROYECTS.map(({title, description, tags, image, link, github}) =>(
-        <article>
-            <h3 class="text-2xl font-semibold text-yellow-200 mb-2" >{title}</h3>
-            <p class="text-lg mb-4 text-pretty">{description}</p>
-            <ul class="flex flex-wrap gap-x-2 gap-y-2 items-center">
-                {
-                    tags.map(tag => (
-                        <li class="flex justify-center">
-                            <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2`}>
-                                <tag.icon class="size-4"></tag.icon>
-                                {tag.name}
-                            </span>
-                        </li>
-                    ))
-                }
-                <a href={github} class="hover:bg-white/40 transition-colors duration-300 flex justify-between items-center rounded-full text-sm py-1 px-2 bg-white/20 border-white/30 border">
-                    <GitHub></GitHub>
-                    GitHub - TFG
-                </a>
-            </ul>
+<style>
+  .slider-container {
+    overflow: hidden;
+    max-width: 100%;
+    margin: 0 auto;
+  }
 
-            <a href={link} target="_blank">
-                <img class="transform transition duration-300 hover:scale-105" src={image} alt={title}>
+  .slider-track {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    will-change: transform;
+  }
+
+  .slider-item {
+    flex: 0 0 100%; /* ocupa todo el ancho del contenedor padre */
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+</style>
+
+<div class="relative max-w-5xl mx-auto">
+    <button
+        type="button"
+        class="absolute left-[-50px] top-1/2 transform -translate-y-1/2 text-white hover:bg-[#14415A] focus:ring-4 focus:outline-none focus:ring-[#1C5073] font-medium rounded-full text-sm p-2.5 inline-flex items-center justify-center"
+        id="prevBtn"
+        aria-label="Anterior proyecto"
+        style="background-color: #1C5073;"
+  >
+        <svg class="w-4 h-4 rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+        <span class="sr-only">Anterior</span>
+  </button>
+  
+  <button
+        type="button"
+        class="absolute right-[-50px] top-1/2 transform -translate-y-1/2 text-white hover:bg-[#14415A] focus:ring-4 focus:outline-none focus:ring-[#1C5073] font-medium rounded-full text-sm p-2.5 inline-flex items-center justify-center"
+        id="nextBtn"
+        aria-label="Siguiente proyecto"
+        style="background-color: #1C5073;"
+    >
+        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+        </svg>
+        <span class="sr-only">Siguiente</span>
+  </button>
+  
+  
+
+  <div class="slider-container" id="sliderContainer">
+    <div class="slider-track" id="sliderTrack">
+      {PROYECTS.map((project, i) => (
+        <article class="slider-item" key={i}>
+          <h3 class="text-2xl font-semibold text-yellow-200 mb-2">{project.title}</h3>
+          <p class="text-lg mb-4 text-pretty">{project.description}</p>
+          <ul class="flex flex-wrap gap-x-2 gap-y-2 items-center mb-4">
+            {project.tags.map(tag => (
+              <li class="flex justify-center" key={tag.name}>
+                <span class={`flex gap-x-2 items-center rounded-full text-sm ${tag.class} py-1 px-2`}>
+                  <tag.icon class="size-4" />
+                  {tag.name}
+                </span>
+              </li>
+            ))}
+            <a
+              href={project.github}
+              class="hover:bg-white/40 transition-colors duration-300 flex justify-between items-center rounded-full text-sm py-1 px-2 bg-white/20 border-white/30 border"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GitHub />
+              {project.githubLabel}
             </a>
+          </ul>
+          <a href={project.link} target="_blank" rel="noopener noreferrer">
+            <img
+              class="transform transition duration-300 hover:scale-105"
+              src={project.image}
+              alt={project.title}
+            />
+          </a>
         </article>
-    ))
-}
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  const sliderTrack = document.getElementById('sliderTrack');
+  const sliderContainer = document.getElementById('sliderContainer');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const total = sliderTrack.children.length;
+  let currentIndex = 0;
+
+  function updateSlide() {
+    const slideWidth = sliderContainer.clientWidth; // ancho visible real
+    sliderTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + total) % total;
+    updateSlide();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % total;
+    updateSlide();
+  });
+
+  // Actualizar al redimensionar ventana
+  window.addEventListener('resize', updateSlide);
+
+  updateSlide();
+</script>

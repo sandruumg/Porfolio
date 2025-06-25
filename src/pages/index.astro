@@ -11,6 +11,8 @@ import Code from '../components/icons/Code.astro';
 import SocialPill from '../components/SocialPill.astro';
 import Experience from '../components/Experience.astro';
 import Proyects from '../components/Proyects.astro';
+import User from '../components/icons/UserIcon.astro';
+import AboutMe from '../components/AboutMe.astro';
 ---
 
 <Layout 
@@ -68,6 +70,14 @@ import Proyects from '../components/Proyects.astro';
 				Proyectos
 			</h2>
 			<Proyects></Proyects>
+		</section>
+		<section id="sobre-mi" class="w-full lg:w-[740px] sm:w-[600px] mx-auto">
+		
+			<h2 class="text-2xl font-semibold mb-6 flex gap-x-3 items-center ml-[-10px]">
+				<User class="size-6"/>
+				Sobre mi
+			</h2>
+			<AboutMe></AboutMe>
 		</section>
 	</main>
 </Layout>
